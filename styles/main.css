@@ -11,3 +11,17 @@ body * {
   border: 1px solid black;
 }
 
+#rem {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+#output {
+  display: flex;
+}
+
+button {
+  border: 1px solid black;
+  height: 24.5px;
+}
