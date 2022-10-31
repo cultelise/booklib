@@ -33,9 +33,6 @@ function removeButton() {
   rem.appendChild(removeBook);
 }
 
-let buttonsRem = rem.querySelectorAll('button');
-console.log(buttonsRem)
-
 function buttonChecker() {
   let buttonsRem = rem.querySelectorAll('button');
   buttonsRem.forEach(button => {
@@ -49,25 +46,12 @@ function buttonChecker() {
             row.remove();
             break;
           }}
-        console.log(e); 
         counter--;
         button.remove();
       })
     }
   })
 }
-
-
-function removeBook(button) {
-  let buttonsRem = rem.querySelectorAll('button');
-    for (i = 0; i < buttonsRem.length; i++) {
-      if (button.id = `button${i}`) {
-        myLibrary.slice(i);
-      }
-    }
-}
-
-
 
 function displayLibrary() {
   for (let book of myLibrary) {
