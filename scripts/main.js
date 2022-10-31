@@ -4,34 +4,76 @@ const tableHeader = document.getElementsByName('th'),
       myLibrary = [],
       rem = document.getElementById('rem');
 
+let counter = 0;
+
 class Book {
-  constructor(title, author, pages, date, rating) {
+  constructor(title, author, pages, date, rating, bookNumber = counter) {
     this.title = title,
     this.author = author,
     this.pages = pages,
     this.date = date,
     this.rating = rating;
-  }
+    this.bookNumber = counter;
+  } 
 }
 
 function addBookToLibrary() {
   const info = document.querySelector('#book').value.split(' '),
-        bookInfo = new Book(info[0], info[1], info[2], info[3], info[4]);
+    bookInfo = new Book(info[0], info[1], info[2], info[3], info[4]);
   myLibrary.push(bookInfo);
   displayLibrary();
+  counter++;
 }
 
 function removeButton() {
   const removeBook = document.createElement('button'), 
         buttonWord = document.createTextNode("Remove Book");
+  removeBook.id = `book${counter}`;
   removeBook.appendChild(buttonWord);
   rem.appendChild(removeBook);
 }
+
+let buttonsRem = rem.querySelectorAll('button');
+console.log(buttonsRem)
+
+function buttonChecker() {
+  let buttonsRem = rem.querySelectorAll('button');
+  buttonsRem.forEach(button => {
+    if (button.className !== 'present') {
+      button.className = 'present';
+      button.addEventListener('click', (e) => {
+        for (i = 0; i < buttonsRem.length; i++) {
+          if (e.target.id === `book${i}`) {
+            myLibrary.splice(i, 1, '');
+            let row = tableBody.querySelector(`#row${i}`);
+            row.remove();
+            break;
+          }}
+        console.log(e); 
+        counter--;
+        button.remove();
+      })
+    }
+  })
+}
+
+
+function removeBook(button) {
+  let buttonsRem = rem.querySelectorAll('button');
+    for (i = 0; i < buttonsRem.length; i++) {
+      if (button.id = `button${i}`) {
+        myLibrary.slice(i);
+      }
+    }
+}
+
+
 
 function displayLibrary() {
   for (let book of myLibrary) {
     if (myLibrary[myLibrary.length - 1] === book) {
       const bodyRow = document.createElement('tr');
+      bodyRow.id = `row${counter}`;
       for (let detail in book) {
         let node, data;
         switch (detail) {
@@ -68,6 +110,7 @@ function displayLibrary() {
         }
       } tableBody.appendChild(bodyRow);
         removeButton();
+        buttonChecker();
     }
   }
 }
