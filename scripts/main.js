@@ -23,39 +23,40 @@ function addBookToLibrary() {
 function displayLibrary() {
   for (let book of myLibrary) {
     if (myLibrary[myLibrary.length - 1] === book) {
-      let tableBody = document.getElementById('bleh');
-      let bodyRow = document.createElement('tr');
+      let tableBody = document.getElementById('bleh'),
+          bodyRow = document.createElement('tr');
       for (let detail in book) {
+        let node, data;
         switch (detail) {
           case 'title':
-            let titleData = document.createElement('td');
-            let titleNode = document.createTextNode(book.title);
-            titleData.appendChild(titleNode);
-            bodyRow.appendChild(titleData);
+            data = document.createElement('td');
+            node = document.createTextNode(book.title);
+            data.appendChild(node);
+            bodyRow.appendChild(data);
             break;
           case 'author':
-            let authorData = document.createElement('td');
-            let authorNode = document.createTextNode(book.author);
-            authorData.appendChild(authorNode);
-            bodyRow.appendChild(authorData);
+            data = document.createElement('td');
+            node = document.createTextNode(book.author);
+            data.appendChild(node);
+            bodyRow.appendChild(data);
             break;
           case 'pages':
-            let pagesData = document.createElement('td');
-            let pagesNode = document.createTextNode(book.pages);
-            pagesData.appendChild(pagesNode);
-            bodyRow.appendChild(pagesData);
+            data = document.createElement('td');
+            node = document.createTextNode(book.pages);
+            data.appendChild(node);
+            bodyRow.appendChild(data);
             break;
           case 'date':
-            let dateData = document.createElement('td');
-            let dateNode = document.createTextNode(book.date);
-            dateData.appendChild(dateNode);
-            bodyRow.appendChild(dateData);
+            data = document.createElement('td');
+            node = document.createTextNode(book.date);
+            data.appendChild(node);
+            bodyRow.appendChild(data);
             break;
           case 'rating':
-            let ratingData = document.createElement('td');
-            let ratingNode = document.createTextNode(book.rating);
-            ratingData.appendChild(ratingNode);
-            bodyRow.appendChild(ratingData);
+            data = document.createElement('td');
+            node = document.createTextNode(book.rating);
+            data.appendChild(node);
+            bodyRow.appendChild(data);
             break;
         }
       } tableBody.appendChild(bodyRow);
