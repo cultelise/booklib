@@ -13,21 +13,23 @@
   <label for="book">
     <input type="text" name="book" id="book" placeholder="title, author, pages, date, rating">
   </label>
-  <button id="submit">Wait!</button>
+  <button id="submit" onclick="addBookToLibrary()">Add book to library</button>
   <div class="field"></div>
-  <table>
-    <thead>
-      <tr>
-        <th id="title">Title</th>
-        <th id="author">Author</th>
-        <th id="pages">Pages</th>
-        <th id="date">Date</th>
-        <th id="rating">rating</th>
-      </tr>
-    </thead>
-    <tbody id="bleh">
-    </tbody>
-  </table>
+  <div id="output">
+    <table>
+      <thead>
+        <tr>
+          <th id="title">Title</th>
+          <th id="author">Author</th>
+          <th id="pages">Pages</th>
+          <th id="date">Date</th>
+          <th id="rating">Rating</th>
+        </tr>
+      </thead>
+      <tbody id="bleh">
+      </tbody>
+    </table>
+  </div>
   <script src="scripts/main.js"></script>
 </body>
 

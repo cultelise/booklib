@@ -2,5 +2,12 @@ input {
   width: 100%;
 }
 
+output {
+  display: flex;
+  flex-direction: column;
+}
 
+body * {
+  border: 1px solid black;
+}
 

@@ -1,8 +1,6 @@
 const tableHeader = document.getElementsByName('th');
-
-const button = document.getElementById('submit');
 const myLibrary = [];
-
+let output = document.getElementById('output');
 
 
 
@@ -20,7 +18,6 @@ function addBookToLibrary() {
   let bookInfo = new Book(info[0], info[1], info[2], info[3], info[4])
   myLibrary.push(bookInfo);
   displayLibrary();
-  console.log(info)
 }
 
 function displayLibrary() {
@@ -31,10 +28,8 @@ function displayLibrary() {
       for (let detail in book) {
         switch (detail) {
           case 'title':
-            console.log(book.detail, book.title)
             let titleData = document.createElement('td');
             let titleNode = document.createTextNode(book.title);
-            
             titleData.appendChild(titleNode);
             bodyRow.appendChild(titleData);
             break;
@@ -64,6 +59,12 @@ function displayLibrary() {
             break;
         }
       } tableBody.appendChild(bodyRow);
+        let removeBook = document.createElement('button');
+        let buttonWord = document.createTextNode("Remove");
+        removeBook.appendChild(buttonWord);
+        console.log(output, removeBook)
+        output.appendChild(removeBook);
+        output.style.display = 'flex';
     }
   }
 }
