@@ -47,3 +47,11 @@ table {
 th {
   min-width: 10px;
 }
+
+[for="read"] {
+  width: 70px;
+}
+
+td {
+  text-align: center;
+}

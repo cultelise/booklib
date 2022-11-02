@@ -15,12 +15,13 @@ let bookCounter = 0;
     /* removalCounter will stand in for whichever remove button is pressed */
 
 class Book {
-  constructor(title, author, pages, date, rating) {
+  constructor(title, author, pages, date, rating, read) {
     this.title = title,
     this.author = author,
     this.pages = pages,
     this.date = date,
     this.rating = rating;
+    this.read = read;
   } 
   number = bookCounter + 1;
 }
@@ -29,10 +30,13 @@ function addBookToLibrary() {
   const inputInfo = document.querySelectorAll('input'), 
         infoDetails = [];
   for (let detail of inputInfo) {
-    infoDetails.push(detail.value);
+    if (detail.value === 'on') {
+      infoDetails.push(detail.checked)
+    } else infoDetails.push(detail.value);
   };
   const bookInfo = new Book(...infoDetails);
   myLibrary.push(bookInfo);
+  console.log(myLibrary)
   displayLibrary();
   bookCounter++;
 }
@@ -54,6 +58,8 @@ function rowShift() {
   })
 }
 
+/* This function just checks which number row/button/book was removed and alters
+the book.number property of each of the other books in myLibrary appropriately. */
 function myLibraryNumShift() {
   for (i = 2; i < myLibrary.length + 2; i++) {
     if (myLibrary[bookCounter - i].number > 1 && myLibrary[bookCounter - i].number > removalCounter) {
@@ -170,6 +176,13 @@ function displayLibrary() {
           case 'rating':
             data = document.createElement('td');
             node = document.createTextNode(book.rating);
+            data.appendChild(node);
+            bodyRow.appendChild(data);
+            break;
+          case 'read':
+            data = document.createElement('td');
+            data.className = 'bookNum';
+            node = document.createTextNode(book.read === true ? '✅': '❌');
             data.appendChild(node);
             bodyRow.appendChild(data);
             break;
