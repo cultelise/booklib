@@ -10,17 +10,19 @@ const tableHeader = document.getElementsByName('th'),
       myLibrary = [],
       rem = document.getElementById('rem');
 
-let counter = 0;
+let bookCounter = 0;
+    removalCounter = -1;
+    /* removalCounter will stand in for whichever remove button is pressed */
 
 class Book {
-  constructor(title, author, pages, date, rating, bookNumber = counter) {
+  constructor(title, author, pages, date, rating) {
     this.title = title,
     this.author = author,
     this.pages = pages,
     this.date = date,
     this.rating = rating;
-    this.bookNumber = counter;
   } 
+  number = bookCounter + 1;
 }
 
 function addBookToLibrary() {
@@ -32,15 +34,19 @@ function addBookToLibrary() {
   const bookInfo = new Book(...infoDetails);
   myLibrary.push(bookInfo);
   displayLibrary();
-  counter++;
+  bookCounter++;
 }
 
+/* Downshifts row ids in sync with myLibrary.  */
 function rowShift() {
   let rows = tableBody.querySelectorAll('tr');
   rows.forEach(row => {
     if (row.id !== `row${0}`) {
       for (i = 1; i <= rows.length; i++) {
-        if (row.id === `row${i}` && count < i) {
+        if (row.id === `row${i}` && removalCounter < i) {
+          /* If the number of the button pressed (removalCounter) 
+          is higher than the id number of the row in question, 
+          we don't want to downshift the row in question's id number. */
           row.id = `row${i - 1}`;
         }
       }
@@ -48,21 +54,37 @@ function rowShift() {
   })
 }
 
+function numberShift() {
+  let bookNumbers = tableBody.querySelectorAll('.bookNum');
+  console.log(bookNumbers)
+  bookNumbers.forEach(bookNumber => {
+      for (i = 1; i <= bookNumbers.length + 1; i++) {
+        if (bookNumber.textContent === `${i}` && removalCounter < i) {
+          bookNumber.textContent = `${i - 1}`;
+          break;
+        }
+      }
+    }
+  )
+}
+
+
 function removeButton() {
   const removeBook = document.createElement('button'), 
-        buttonWord = document.createTextNode(`Remove "${myLibrary[counter]['title']}"`);
-  removeBook.id = `book${counter}`;
+        buttonWord = document.createTextNode(`Remove "${myLibrary[bookCounter]['title']}"`);
+  removeBook.id = `book${bookCounter}`;
   removeBook.appendChild(buttonWord);
   rem.appendChild(removeBook);
 }
-let count = -1;
+
 
 function buttonChecker() {
   let buttonsRemove = rem.querySelectorAll('button');
   buttonsRemove.forEach(button => {
-    if ( count !== -1 && button.id !== 'book0') {
+    if (removalCounter !== -1 && button.id !== 'book0') {
+      /* Checks if a remove button has been clicked yet, then downshifts button ids in sync with myLibrary. */
       for (i = 1; i <= buttonsRemove.length; i++) {
-        if (button.id === `book${i}`  && count < i) {
+        if (button.id === `book${i}` && removalCounter < i) {
           button.id = `book${i - 1}`;
         }
       }
@@ -75,16 +97,15 @@ function buttonChecker() {
             myLibrary.splice(i, 1);
             let row = tableBody.querySelector(`#row${i}`);
             row.remove();
-            count = i;
-            console.log(count);
+            removalCounter = i;
             rowShift();
             buttonChecker();
+            numberShift();
             break;
           }}
-        counter--;
+        bookCounter--;
         button.remove();
       }); 
-      console.log(count)
     }
   })
 }
@@ -93,10 +114,17 @@ function displayLibrary() {
   for (let book of myLibrary) {
     if (myLibrary[myLibrary.length - 1] === book) {
       const bodyRow = document.createElement('tr');
-      bodyRow.id = `row${counter}`;
+      bodyRow.id = `row${bookCounter}`;
       for (let detail in book) {
         let node, data;
         switch (detail) {
+          case 'number':
+            data = document.createElement('td');
+            data.className = 'bookNum';
+            node = document.createTextNode(book.number);
+            data.appendChild(node);
+            bodyRow.appendChild(data);
+            break;
           case 'title':
             data = document.createElement('td');
             node = document.createTextNode(book.title);

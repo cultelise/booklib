@@ -42,3 +42,7 @@ button {
 table {
   min-width: 50%;
 }
+
+th {
+  min-width: 10px;
+}
