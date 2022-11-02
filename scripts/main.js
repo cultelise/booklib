@@ -1,3 +1,9 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const submitButton = document.getElementById('submit');
+  submitButton.addEventListener('mousedown', addBookToLibrary);
+})
+
+
 const tableHeader = document.getElementsByName('th'),
       output = document.getElementById('output'),
       tableBody = document.getElementById('tableBody'),
@@ -18,8 +24,12 @@ class Book {
 }
 
 function addBookToLibrary() {
-  const info = document.querySelector('#book').value.split(' '),
-    bookInfo = new Book(info[0], info[1], info[2], info[3], info[4]);
+  const inputInfo = document.querySelectorAll('input'), 
+        infoDetails = [];
+  for (let detail of inputInfo) {
+    infoDetails.push(detail.value);
+  };
+  const bookInfo = new Book(...infoDetails);
   myLibrary.push(bookInfo);
   displayLibrary();
   counter++;
@@ -27,7 +37,7 @@ function addBookToLibrary() {
 
 function removeButton() {
   const removeBook = document.createElement('button'), 
-        buttonWord = document.createTextNode("Remove Book");
+        buttonWord = document.createTextNode(`Remove "${myLibrary[counter]['title']}"`);
   removeBook.id = `book${counter}`;
   removeBook.appendChild(buttonWord);
   rem.appendChild(removeBook);

@@ -10,10 +10,24 @@
 </head>
 
 <body>
-  <label for="book">
-    <input type="text" name="book" id="book" placeholder="title, author, pages, date, rating">
-  </label>
-  <button id="submit" onclick="addBookToLibrary()">Add book to library</button>
+  <div id="book-input">
+    <label for="title">Title:    
+      <input type="text" name="title" id="title" placeholder="The Black Sun">
+    </label>
+    <label for="author">Author:
+      <input type="text" name="author" id="author" placeholder="Guy Butsix">
+    </label>
+    <label for="pages">Pages:
+      <input type="text" name="pages" id="pages" placeholder="9001">
+    </label>
+    <label for="date">Date:
+      <input type="text" name="date" id="date" placeholder="August 4, 2077">
+    </label>
+    <label for="rating">Rating:
+      <input type="text" name="rating" id="rating" placeholder="10/10">
+    </label>
+    <button id="submit">Add book to library</button>
+  </div>
   <div class="field"></div>
   <div id="output">
     <table>
