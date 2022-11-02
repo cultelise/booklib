@@ -35,6 +35,19 @@ function addBookToLibrary() {
   counter++;
 }
 
+function rowShift() {
+  let rows = tableBody.querySelectorAll('tr');
+  rows.forEach(row => {
+    if (row.id !== `row${0}`) {
+      for (i = 1; i <= rows.length; i++) {
+        if (row.id === `row${i}` && count < i) {
+          row.id = `row${i - 1}`;
+        }
+      }
+    }
+  })
+}
+
 function removeButton() {
   const removeBook = document.createElement('button'), 
         buttonWord = document.createTextNode(`Remove "${myLibrary[counter]['title']}"`);
@@ -42,23 +55,36 @@ function removeButton() {
   removeBook.appendChild(buttonWord);
   rem.appendChild(removeBook);
 }
+let count = -1;
 
 function buttonChecker() {
-  let buttonsRem = rem.querySelectorAll('button');
-  buttonsRem.forEach(button => {
-    if (button.className !== 'present') {
-      button.className = 'present';
+  let buttonsRemove = rem.querySelectorAll('button');
+  buttonsRemove.forEach(button => {
+    if ( count !== -1 && button.id !== 'book0') {
+      for (i = 1; i <= buttonsRemove.length; i++) {
+        if (button.id === `book${i}`  && count < i) {
+          button.id = `book${i - 1}`;
+        }
+      }
+    };
+    if (button.className !== 'exists') {
+      button.className = 'exists';
       button.addEventListener('click', (e) => {
-        for (i = 0; i < buttonsRem.length; i++) {
+        for (i = 0; i < buttonsRemove.length; i++) {
           if (e.target.id === `book${i}`) {
-            myLibrary.splice(i, 1, '');
+            myLibrary.splice(i, 1);
             let row = tableBody.querySelector(`#row${i}`);
             row.remove();
+            count = i;
+            console.log(count);
+            rowShift();
+            buttonChecker();
             break;
           }}
         counter--;
         button.remove();
-      })
+      }); 
+      console.log(count)
     }
   })
 }
