@@ -54,6 +54,20 @@ function rowShift() {
   })
 }
 
+function myLibraryNumShift() {
+  for (i = 2; i < myLibrary.length + 2; i++) {
+    if (myLibrary[bookCounter - i].number > 1 && myLibrary[bookCounter - i].number > removalCounter) {
+      if (myLibrary[bookCounter - i].checked == undefined) {
+        myLibrary[bookCounter - i].checked = true;
+      myLibrary[bookCounter - i].number = `${myLibrary[bookCounter - i].number - 1}`
+      } else if (myLibrary[bookCounter - i].checked == false) {
+            myLibrary[bookCounter - i].checked = true;
+            myLibrary[bookCounter - i].number = `${myLibrary[bookCounter - i].number - 1}`
+        } 
+    }
+  }
+}
+
 function numberShift() {
   let bookNumbers = tableBody.querySelectorAll('.bookNum');
   console.log(bookNumbers)
@@ -61,11 +75,14 @@ function numberShift() {
       for (i = 1; i <= bookNumbers.length + 1; i++) {
         if (bookNumber.textContent === `${i}` && removalCounter < i) {
           bookNumber.textContent = `${i - 1}`;
+          myLibraryNumShift();
           break;
         }
       }
-    }
-  )
+    } 
+  ); 
+  for (i = 2; i < myLibrary.length + 2; i++) {
+    myLibrary[bookCounter - i].checked = false};
 }
 
 
@@ -75,6 +92,7 @@ function removeButton() {
   removeBook.id = `book${bookCounter}`;
   removeBook.appendChild(buttonWord);
   rem.appendChild(removeBook);
+  removalCounter = -1;
 }
 
 
