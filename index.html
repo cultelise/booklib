@@ -10,27 +10,27 @@
 </head>
 
 <body>
-  <div id="book-input">
+  <form id="book-input">
     <label for="title">Title:
-      <input type="text" name="title" id="title" placeholder="The Black Sun">
+      <input type="text" name="title" id="title" placeholder="The Black Sun" required>
     </label>
     <label for="author">Author:
-      <input type="text" name="author" id="author" placeholder="Guy Butsix">
+      <input type="text" name="author" id="author" placeholder="Guy Butsix" required>
     </label>
     <label for="pages">Pages:
-      <input type="text" name="pages" id="pages" placeholder="9001">
+      <input type="text" name="pages" id="pages" placeholder="9001" required>
     </label>
     <label for="date">Date:
-      <input type="text" name="date" id="date" placeholder="August 4, 2077">
+      <input type="text" name="date" id="date" placeholder="August 4, 2077" required>
     </label>
     <label for="rating">Rating:
-      <input type="text" name="rating" id="rating" placeholder="10/10">
+      <input type="text" name="rating" id="rating" placeholder="10/10" required>
     </label>
     <label for="read">Read?
-      <input type="checkbox" name="read" id="read">
+      <input type="checkbox" name="read" id="read" required>
     </label>
-    <button id="submit">Add book to library</button>
-  </div>
+    <button type="submit" id="submit">Add book to library</button>
+  </form>
   <div class="field"></div>
   <div id="output">
     <table>

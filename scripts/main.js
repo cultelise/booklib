@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const submitButton = document.getElementById("submit");
-  submitButton.addEventListener("click", addBookToLibrary);
+  const form = document.querySelector("#book-input");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault()
+    addBookToLibrary();
+  });
 });
 
 const tableHeader = document.getElementsByName("th"),
@@ -26,6 +29,7 @@ class Book {
 }
 
 function addBookToLibrary() {
+  console.log('We got here...')
   const inputInfo = document.querySelectorAll("input"),
     infoDetails = [];
   for (let detail of inputInfo) {
@@ -37,6 +41,7 @@ function addBookToLibrary() {
   myLibrary.push(bookInfo);
   displayLibrary();
   bookCounter++;
+  preventDefault()
 }
 
 /* Downshifts row ids in sync with myLibrary.  */
